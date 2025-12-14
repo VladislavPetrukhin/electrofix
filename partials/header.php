@@ -29,6 +29,16 @@ $pageTitle = $pageTitle ?? 'ElectroFix';
       </a>
       <span class="ms-2 text-secondary">учебный проект</span>
     </div>
+<form action="<?= BASE_URL ?>/search.php" method="get" class="d-inline-flex ms-3">
+  <input
+    type="text"
+    name="q"
+    class="form-control form-control-sm"
+    placeholder="Поиск по сайту"
+    required
+  >
+</form>
+
     <nav class="d-none d-md-block">
       <a href="<?= BASE_URL ?>/devices.php">Устройства</a>
       <a href="<?= BASE_URL ?>/issues.php">Неисправности</a>
