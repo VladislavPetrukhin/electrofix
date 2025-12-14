@@ -45,6 +45,7 @@ $pageTitle = $pageTitle ?? 'ElectroFix';
       <a href="<?= BASE_URL ?>/guides.php">Гайды</a>
       <a href="<?= BASE_URL ?>/tools.php">Инструменты</a>
       <a href="<?= BASE_URL ?>/about.php">Связь</a>
+	<a href="<?= BASE_URL ?>/stats.php">Статистика</a>
       <a href="<?= BASE_URL ?>/admin/"><?= is_logged_in() ? 'Админка' : 'Вход' ?></a>
     </nav>
   </div>
