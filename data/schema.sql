@@ -1,0 +1,78 @@
+-- ElectroFix DB schema (MySQL/MariaDB)
+-- Create database first:
+--   CREATE DATABASE electrofix CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- Then import this file.
+
+SET NAMES utf8mb4;
+SET time_zone = "+00:00";
+
+CREATE TABLE IF NOT EXISTS roles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(32) NOT NULL UNIQUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  role_id INT NULL,
+  username VARCHAR(64) NOT NULL UNIQUE,
+  pass_hash VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL,
+  CONSTRAINT fk_users_role FOREIGN KEY (role_id) REFERENCES roles(id)
+    ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS devices (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(128) NOT NULL,
+  category VARCHAR(64) NULL,
+  short_desc TEXT NULL,
+  full_desc TEXT NULL,
+  thumb_path VARCHAR(255) NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS issues (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  device_id INT NULL,
+  symptom VARCHAR(255) NOT NULL,
+  causes TEXT NULL,
+  solution TEXT NULL,
+  severity VARCHAR(32) NULL,
+  created_at DATETIME NOT NULL,
+  CONSTRAINT fk_issues_device FOREIGN KEY (device_id) REFERENCES devices(id)
+    ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS guides (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  device_id INT NULL,
+  title VARCHAR(255) NOT NULL,
+  summary TEXT NULL,
+  content MEDIUMTEXT NULL,
+  cover_path VARCHAR(255) NULL,
+  created_at DATETIME NOT NULL,
+  CONSTRAINT fk_guides_device FOREIGN KEY (device_id) REFERENCES devices(id)
+    ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS uploads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NULL,
+  original_name VARCHAR(255) NOT NULL,
+  file_path VARCHAR(255) NOT NULL,
+  mime VARCHAR(120) NULL,
+  size INT NULL,
+  created_at DATETIME NOT NULL,
+  CONSTRAINT fk_uploads_user FOREIGN KEY (user_id) REFERENCES users(id)
+    ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS questions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(64) NOT NULL,
+  email VARCHAR(120) NOT NULL,
+  device VARCHAR(64) NOT NULL,
+  problem TEXT NOT NULL,
+  created_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

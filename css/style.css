@@ -1,0 +1,90 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #0b0c10;
+  color: #f8f9fa;
+}
+
+.hero-title {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+#main-content {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.section-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.4);
+}
+
+footer {
+  background-color: #050608;
+  color: #adb5bd;
+}
+
+.table thead th {
+  border-bottom: 2px solid #495057;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(255,255,255,0.03);
+}
+
+aside {
+  background-color: #111319;
+  border-radius: 0.5rem;
+  color: #f8f9fa;
+}
+
+strong, b {
+  color: #ffc107;
+}
+
+em, i {
+  color: #9fd3ff;
+}
+
+
+/* --- Lab helper: ID selector example --- */
+#toastArea {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1080;
+}
+
+/* Bootstrap dark theme + подгон под наш чёрный фон */
+html[data-bs-theme="dark"]{
+  --bs-body-bg: #0b0c10;
+  --bs-body-color: #f8f9fa;
+
+  --bs-tertiary-bg: #111319;
+  --bs-border-color: #2b3038;
+
+  --bs-card-bg: #111319;
+  --bs-card-border-color: #2b3038;
+}
+
+/* На всякий: чтобы card точно была темной */
+.card{
+  background: var(--bs-card-bg);
+  border-color: var(--bs-card-border-color);
+}
+
+/* Инпуты/textarea/file — тоже в тему */
+.form-control, .form-select{
+  background-color: #0f1116;
+  color: #f8f9fa;
+  border-color: #2b3038;
+}
+.form-control::placeholder{ color:#6c757d; opacity:1; }
+.form-control:focus, .form-select:focus{
+  border-color:#ffc107;
+  box-shadow: 0 0 0 .25rem rgba(255,193,7,.15);
+}
