@@ -360,3 +360,363 @@ code{
   padding: .12em .35em;
   border-radius: 8px;
 }
+/* Колонка тоже flex — иначе h-100 не работает */
+.row > [class*="col"] {
+  display: flex;
+}
+
+/* Карточка растягивается на всю высоту колонки */
+.device-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 60%),
+              #111319;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+/* ---------- HOVER ---------- */
+.device-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,193,7,.45);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.55),
+    0 0 0 1px rgba(255,193,7,.25);
+}
+
+/* ---------- IMAGE ZONE ---------- */
+.device-card img,
+.device-card .card-img-top {
+  height: 200px;              /* фикс */
+  width: 100%;
+  object-fit: contain;        /* не обрезаем */
+  background: #ffffff;        /* белая подложка */
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+/* ---------- BODY ---------- */
+.device-card .card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0;
+}
+
+/* ---------- TITLE ---------- */
+.device-card .card-title {
+  min-height: 2.6em;          /* ~2 строки */
+  line-height: 1.3;
+  margin-bottom: .25rem;
+}
+
+/* ---------- CATEGORY ---------- */
+.device-card .card-subtitle {
+  min-height: 1.4em;
+  font-size: .9rem;
+  color: #9aa4ad;
+}
+
+/* ---------- DESCRIPTION ---------- */
+.device-card .card-text {
+  flex-grow: 1;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;      /* максимум 3 строки */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- BUTTON ---------- */
+.device-card .btn {
+  margin-top: auto;           /* КЛЮЧ */
+}
+
+/* Микро-анимация кнопки при hover карточки */
+.device-card:hover .btn {
+  background: linear-gradient(135deg, #ffd84d, #ffc107);
+  color: #000;
+  border-color: transparent;
+}
+/* =========================================================
+   Guides — list items hover / active
+   ========================================================= */
+
+.list-group-item{
+  background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 60%),
+              #111319 !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 14px !important;
+  margin-bottom: 10px;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.list-group-item-action:hover{
+  transform: translateY(-4px);
+  border-color: rgba(255,193,7,.35) !important;
+  box-shadow: 0 22px 50px rgba(0,0,0,.55);
+  background: linear-gradient(180deg, rgba(255,193,7,.06), transparent 65%),
+              #111319 !important;
+}
+
+/* Выбранный (если ты добавляешь .active по клику) */
+.list-group-item.active,
+.list-group-item.active:hover{
+  border-color: rgba(255,193,7,.55) !important;
+  box-shadow: 0 0 0 1px rgba(255,193,7,.25), 0 22px 50px rgba(0,0,0,.55);
+  background: linear-gradient(180deg, rgba(255,193,7,.10), transparent 65%),
+              #111319 !important;
+  color: #f8f9fa !important;
+}
+/* =========================================================
+   Guides — preview panel polish
+   ========================================================= */
+
+#guidePreview.card{
+  border-radius: 16px;
+  border-color: rgba(255,255,255,.09);
+  overflow: hidden;
+}
+
+#guidePreview .card-body{
+  padding: 1.25rem;
+}
+
+#guidePreview img{
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+#guidePreview .text-secondary{
+  color: rgba(154,164,173,.95) !important;
+}
+/* =========================================================
+   Issues — table row hover polish
+   ========================================================= */
+
+#issuesTable tbody tr{
+  transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+
+#issuesTable tbody tr:hover{
+  background-color: rgba(255,255,255,0.045) !important;
+  box-shadow: inset 3px 0 0 rgba(255,193,7,.55);
+}
+
+#issuesTable tbody tr:hover td{
+  color: #fff;
+}
+
+#issuesTable td, #issuesTable th{
+  border-color: rgba(255,255,255,.08) !important;
+}
+/* =========================================================
+   Small buttons hover
+   ========================================================= */
+
+.btn.btn-sm{
+  border-radius: 12px;
+}
+
+.btn-outline-light.btn-sm:hover{
+  border-color: rgba(255,193,7,.45);
+  box-shadow: 0 10px 22px rgba(255,193,7,.10);
+}
+/* Optional: soft glow on hover elements */
+.device-card:hover,
+.list-group-item-action:hover,
+#guidePreview.card:hover{
+  box-shadow:
+    0 26px 60px rgba(0,0,0,.55),
+    0 0 0 1px rgba(255,193,7,.20);
+}
+/* =========================================================
+   Issues table — UI upgrade
+   ========================================================= */
+
+/* Общий контейнер таблицы */
+#issuesTable {
+  border-collapse: separate;
+  border-spacing: 0 10px; /* расстояние между строками */
+}
+
+/* Заголовки */
+#issuesTable thead th {
+  font-weight: 600;
+  color: #e6e6e6;
+  border-bottom: none !important;
+  padding-bottom: 12px;
+}
+
+/* Строка как "карточка" */
+#issuesTable tbody tr {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.02), transparent 60%),
+    #111319;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+/* Чтобы border-radius реально работал */
+#issuesTable tbody tr td:first-child {
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+}
+#issuesTable tbody tr td:last-child {
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+/* Ячейки */
+#issuesTable tbody td {
+  border: none !important;
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+/* Hover строки */
+#issuesTable tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 22px 50px rgba(0,0,0,.55),
+    inset 4px 0 0 rgba(255,193,7,.55); /* акцент слева */
+}
+
+/* ---------------------------------------------------------
+   Severity badges (без изменения HTML)
+   --------------------------------------------------------- */
+
+/* Критическая */
+#issuesTable td:contains("Критическая"),
+#issuesTable td:contains("Критическая") {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+/* Средняя */
+#issuesTable td:contains("Средняя") {
+  color: #ffc107;
+  font-weight: 500;
+}
+
+/* Низкая (на будущее) */
+#issuesTable td:contains("Низкая") {
+  color: #6ee7b7;
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------
+   Кнопка "Подробнее"
+   --------------------------------------------------------- */
+
+#issuesTable .btn {
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: .85rem;
+  transition:
+    background .15s ease,
+    box-shadow .15s ease,
+    border-color .15s ease;
+}
+
+#issuesTable tbody tr:hover .btn {
+  background: linear-gradient(135deg, #ffd84d, #ffc107);
+  color: #000;
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(255,193,7,.25);
+}
+/* =========================================================
+   Issues — FIX yellow border flicker
+   ========================================================= */
+
+/* Строка как контейнер */
+#issuesTable tbody tr {
+  position: relative;
+  overflow: hidden; /* важно */
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+/* УБИРАЕМ старый inset-акцент */
+#issuesTable tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 50px rgba(0,0,0,.55);
+}
+
+/* НОВЫЙ акцент слева — через псевдоэлемент */
+#issuesTable tbody tr::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    #ffd84d,
+    #ffc107
+  );
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+/* Показываем акцент ТОЛЬКО на hover */
+#issuesTable tbody tr:hover::before {
+  opacity: 1;
+}
+/* =========================================================
+   Issues — FIX missing "Симптом" text
+   ========================================================= */
+
+/* Убираем псевдоэлемент со строки */
+#issuesTable tbody tr::before {
+  content: none !important;
+}
+
+/* Строка больше не режет содержимое */
+#issuesTable tbody tr {
+  overflow: visible;
+}
+
+/* Первая ячейка — контейнер для акцента */
+#issuesTable tbody td:first-child {
+  position: relative;
+  padding-left: 22px; /* место под акцент */
+}
+
+/* Акцент СЛЕВА — внутри первой ячейки */
+#issuesTable tbody td:first-child::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ffd84d, #ffc107);
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+/* Показываем акцент при hover строки */
+#issuesTable tbody tr:hover td:first-child::before {
+  opacity: 1;
+}
