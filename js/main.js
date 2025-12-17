@@ -189,7 +189,7 @@ async function handleSupportForm(e) {
     <p><span class="k">Устройство:</span> ${esc(device)}</p>
     <p class="k" style="margin-bottom:6px;">Описание проблемы:</p>
     <pre>${esc(problem)}</pre>
-    <p class="warn"><strong>Важно:</strong> это учебная форма, а не реальный сервис 🙂</p>
+    <p class="warn"><strong>Важно:</strong> это учебная форма, а не реальный сервис</p>
     <p><a href="javascript:window.close()">Закрыть</a></p>
   </div>
 </body></html>`);
@@ -273,4 +273,73 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+});
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function showDeviceModal(id) {
+  $.getJSON('api/devices.php', { id })
+    .done(data => {
+      const title = document.getElementById('deviceModalTitle');
+      const body  = document.getElementById('deviceModalBody');
+      const modal = document.getElementById('deviceModal');
+      if (!title || !body || !modal) return;
+
+      title.textContent = data.name || 'Устройство';
+      body.innerHTML = `
+        ${data.image ? `<img src="${escapeHtml(data.image)}" class="img-fluid rounded mb-3">` : ''}
+        ${data.short_desc ? `<p>${escapeHtml(data.short_desc)}</p>` : ''}
+        ${data.long_desc ? `<div class="text-muted small">${escapeHtml(data.long_desc)}</div>` : ''}
+      `;
+
+      bootstrap.Modal.getOrCreateInstance(modal).show();
+    });
+}
+
+function showIssueOffcanvas(id) {
+  $.getJSON('api/issues.php', { id })
+    .done(data => {
+      const title = document.getElementById('issueDetailsTitle');
+      const body  = document.getElementById('issueDetailsBody');
+      const off   = document.getElementById('issueDetails');
+      if (!title || !body || !off) return;
+
+      title.textContent = data.name || 'Неисправность';
+      body.innerHTML = `
+        <p><b>Симптомы:</b> ${escapeHtml(data.symptoms)}</p>
+        <p><b>Причины:</b> ${escapeHtml(data.causes)}</p>
+        <p><b>Решение:</b> ${escapeHtml(data.fix)}</p>
+      `;
+
+      bootstrap.Offcanvas.getOrCreateInstance(off).show();
+    });
+}
+
+document.addEventListener('click', e => {
+  const dev = e.target.closest('.device-more');
+  if (dev) {
+    e.preventDefault();
+    showDeviceModal(dev.dataset.deviceId);
+  }
+
+  const iss = e.target.closest('.issue-more');
+  if (iss) {
+    e.preventDefault();
+    showIssueOffcanvas(iss.dataset.issueId);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('issueSearch');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase();
+    document.querySelectorAll('.issue-item').forEach(el => {
+      el.classList.toggle('d-none', q && !el.textContent.toLowerCase().includes(q));
+    });
+  });
 });

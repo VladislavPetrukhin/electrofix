@@ -61,11 +61,8 @@ require_once __DIR__ . '/partials/header.php';
   <aside class="col-lg-5">
     <div class="card p-4">
       <h2 class="h5">Контакты</h2>
-      <p class="text-secondary mb-2">Это учебный сайт, поэтому вместо “реального сервиса” — демо.</p>
-      <ul class="mb-0">
-        <li>Раздел админки: <a class="link-warning" href="admin/">/admin/</a></li>
-        <li>API JSON: <code>/api/</code></li>
-      </ul>
+      <p class="text-secondary mb-2">Это учебный сайт</p>
+     
     </div>
   </aside>
 </div>

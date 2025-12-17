@@ -20,7 +20,7 @@ $pageTitle = $pageTitle ?? 'ElectroFix';
   <!-- Styles -->
   <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
 </head>
-<body>
+<body class="bg-dark text-light d-flex flex-column min-vh-100">
 <header class="site-header py-3">
   <div class="container d-flex align-items-center justify-content-between">
     <div>
@@ -51,5 +51,5 @@ $pageTitle = $pageTitle ?? 'ElectroFix';
   </div>
 </header>
 
-<main class="container my-4">
+<main class="container my-4 flex-grow-1">
 <div id="toastArea" aria-live="polite" aria-atomic="true"></div>
