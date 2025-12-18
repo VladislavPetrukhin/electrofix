@@ -23,7 +23,7 @@ try {
   </p>
 </section>
 
-<div id="devicesList" class="row g-4">
+<div id="devicesList" class="row g-4 devices-grid">
 <?php foreach ($devices as $d): ?>
   <article class="col-md-6 col-lg-4">
     <div class="card p-3 h-100 device-card">
